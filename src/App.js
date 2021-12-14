@@ -5,10 +5,13 @@ import Container from './components/container/Container';
 import Section from './components/section/Section';
 import ContactForm from './components/contactForm/ContactForm';
 import ContactList from './components/contactList/ContactList';
+import initData from './tempData/data.json';
+import ContactFilter from './components/contactFilter/ContactFilter';
 
 class App extends React.Component {
   state = {
-    contacts: [],
+    contacts: initData,
+    filter: '',
   };
 
   addContact = newContact => {
@@ -25,7 +28,19 @@ class App extends React.Component {
     }));
   };
 
+  filterChange = event => {
+    this.setState({
+      filter: event.currentTarget.value,
+    });
+  };
+
   render() {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter),
+    );
+
     return (
       <div className="App">
         <h1 className="AppHeader">Phonebook</h1>
@@ -35,7 +50,11 @@ class App extends React.Component {
           </Section>
 
           <Section title={'Contacts'}>
-            <ContactList contacts={this.state.contacts} />
+            <ContactFilter
+              value={this.state.filter}
+              onChange={this.filterChange}
+            />
+            <ContactList contacts={filteredContacts} />
           </Section>
         </Container>
       </div>
