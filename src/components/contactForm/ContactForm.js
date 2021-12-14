@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-import './ContactForm.module.css';
+import PropTypes from 'prop-types';
+import s from './ContactForm.module.css';
 
 export class ContactForm extends Component {
   state = {
     name: '',
+    number: '',
   };
 
   handleNameChange = event => {
-    this.setState({ name: event.currentTarget.value });
+    const { name, value } = event.currentTarget;
+    this.setState({
+      [name]: value,
+    });
   };
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.handleSubmit(this.state.name);
+    this.props.handleSubmit(this.state);
     this.resset();
   };
 
   resset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <label>
+      <form onSubmit={this.onSubmit} className={s.contactForm}>
+        <label className={s.inputLabel}>
           Name
           <input
+            className={s.formInput}
             type="text"
             name="name"
             value={this.state.name}
@@ -36,10 +41,30 @@ export class ContactForm extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+
+        <label className={s.inputLabel}>
+          Number
+          <input
+            className={s.formInput}
+            type="tel"
+            name="number"
+            value={this.state.number}
+            onChange={this.handleNameChange}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
+        </label>
+        <button className={s.formButton} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }
 }
+
+ContactForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default ContactForm;

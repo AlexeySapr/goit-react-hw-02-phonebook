@@ -6,7 +6,11 @@ const ContactList = ({ contacts }) => {
   return (
     <ul className="contactList">
       {contacts.map(contact => (
-        <ContactListItem key={contact.id} name={contact.name} />
+        <ContactListItem
+          key={contact.id}
+          name={contact.name}
+          number={contact.number}
+        />
       ))}
     </ul>
   );

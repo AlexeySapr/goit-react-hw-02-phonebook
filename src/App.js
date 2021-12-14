@@ -9,13 +9,15 @@ import ContactList from './components/contactList/ContactList';
 class App extends React.Component {
   state = {
     contacts: [],
-    name: '',
   };
 
   addContact = newContact => {
+    const { name, number } = newContact;
+
     const contact = {
-      name: newContact,
       id: nanoid(),
+      name,
+      number,
     };
 
     this.setState(prevState => ({
