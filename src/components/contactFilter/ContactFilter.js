@@ -3,8 +3,8 @@ import s from './ContactFilter.module.css';
 
 const ContactFilter = ({ value, onChange }) => {
   return (
-    <label>
-      Find contacts by name
+    <label className={s.filterLabel}>
+      Find contacts by name:
       <input
         className={s.filterInput}
         type="text"
