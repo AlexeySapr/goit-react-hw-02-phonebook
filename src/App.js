@@ -14,8 +14,25 @@ class App extends React.Component {
     filter: '',
   };
 
+  isInContacts = ({ name, number }) => {
+    const normalizedName = name.toLowerCase().replace(/\s+/g, '');
+    const normalizedNumber = number.replace(/\D/g, '');
+    console.log(normalizedNumber);
+    return this.state.contacts.some(contact => {
+      return (
+        contact.name.toLowerCase().replace(/\s+/g, '') === normalizedName ||
+        contact.number.replace(/\D/g, '') === normalizedNumber
+      );
+    });
+  };
+
   addContact = newContact => {
     const { name, number } = newContact;
+
+    if (this.isInContacts(newContact)) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
 
     const contact = {
       id: nanoid(),
@@ -25,6 +42,12 @@ class App extends React.Component {
 
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
+    }));
+  };
+
+  delContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
@@ -54,7 +77,10 @@ class App extends React.Component {
               value={this.state.filter}
               onChange={this.filterChange}
             />
-            <ContactList contacts={filteredContacts} />
+            <ContactList
+              contacts={filteredContacts}
+              onDeleteContact={this.delContact}
+            />
           </Section>
         </Container>
       </div>
