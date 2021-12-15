@@ -7,6 +7,7 @@ import ContactForm from './components/contactForm/ContactForm';
 import ContactList from './components/contactList/ContactList';
 import initData from './tempData/data.json';
 import ContactFilter from './components/contactFilter/ContactFilter';
+import Header from './components/header/Header';
 
 class App extends React.Component {
   state = {
@@ -65,8 +66,7 @@ class App extends React.Component {
     );
 
     return (
-      <div className="App">
-        <h1 className="AppHeader">Phonebook</h1>
+      <Header title="Phonebook">
         <Container>
           <Section title={'Phonebook'}>
             <ContactForm handleSubmit={this.addContact} />
@@ -83,7 +83,7 @@ class App extends React.Component {
             />
           </Section>
         </Container>
-      </div>
+      </Header>
     );
   }
 }
