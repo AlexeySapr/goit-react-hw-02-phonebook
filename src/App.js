@@ -1,6 +1,5 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import './App.css';
 import Container from './components/container/Container';
 import Section from './components/section/Section';
 import ContactForm from './components/contactForm/ContactForm';
