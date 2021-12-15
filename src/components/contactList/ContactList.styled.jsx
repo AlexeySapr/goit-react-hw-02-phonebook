@@ -9,7 +9,7 @@ export const ListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #57d0e6;
+  border-bottom: ${props => `1px solid ${props.theme.colors.primary}`};
 `;
 
 export const Text = styled.p`
@@ -26,9 +26,9 @@ export const ItemBtn = styled.button`
 
   &:hover,
   &:focus {
-    color: #fff;
+    color: ${props => props.theme.colors.white};
     outline: 0;
     cursor: pointer;
-    background-color: #57d0e6;
+    background-color: ${props => props.theme.colors.primary};
   }
 `;

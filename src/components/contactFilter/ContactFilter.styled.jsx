@@ -9,18 +9,14 @@ export const FormInput = styled.input`
   margin-left: 20px;
 
   padding: 0.2rem 0.4rem;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #bdbdbd;
+  color: ${props => props.theme.colors.textColor};
+  border: ${props => `1px solid ${props.theme.colors.borderColor}`};
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &:focus {
-    color: #212529;
-    background-color: #fff;
-    border-color: #57d0e6;
+    border-color: ${props => props.theme.colors.primary};
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(87, 208, 230, 0.5);
+    box-shadow: ${props => props.theme.colors.inputBoxShadow};
   }
 `;
